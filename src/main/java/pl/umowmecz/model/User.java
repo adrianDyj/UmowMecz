@@ -1,7 +1,8 @@
 package pl.umowmecz.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,12 +14,16 @@ public class User {
     private long id;
     private String firstname;
     private String lastname;
-    @NotEmpty
+    @NotNull
     private String email;
-    @NotEmpty
+    @NotNull
     private String password;
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<UserRole> roles = new HashSet<>();
+    private Set<Event> events;
+
+    public User() {
+    }
 
     public long getId() {
         return id;
