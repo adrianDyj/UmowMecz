@@ -30,6 +30,9 @@ public class Event {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @NotNull
+    private Type type;
+
     public Event() {
     }
 
@@ -71,5 +74,13 @@ public class Event {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 }
