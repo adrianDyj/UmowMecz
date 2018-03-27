@@ -3,10 +3,13 @@ package pl.umowmecz.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.*;
 
+@XmlRootElement
 @Entity
-public class Event {
+public class Event implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +24,6 @@ public class Event {
     @Size(max = 250)
     private String description;
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "posted_at")
     private Date postedAt;
@@ -30,10 +32,14 @@ public class Event {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @NotNull
     private Type type;
 
     public Event() {
+    }
+
+    public Event(@NotNull @Size(max = 100) String title, @NotNull @Size(max = 250) String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public long getId() {

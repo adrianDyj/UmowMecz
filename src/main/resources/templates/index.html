@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Event Manager</title>
+</head>
+<body>
+    <p th:text="${message}"></p>
+    <h1>Add event:</h1>
+    <form th:action="@{/event}" th:object="${eventModel}" method="post">
+        <p><input type="text" th:field="*{title}" placeholder="Title" /></p>
+        <p><input type="text" th:field="*{description}" placeholder="Description"/></p>
+        <p><input type="submit" value="Add event" /></p>
+    </form>
+
+    <a th:href="@{/event}">List all events</a>
+</body>
+</html>

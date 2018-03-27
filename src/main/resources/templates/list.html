@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all events</title>
+</head>
+<body>
+    <h1>All Events:</h1>
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+        <tr th:each="event: ${eventList}">
+            <td th:text="${event.title}"></td>
+            <td th:text="${event.description}"></td>
+        </tr>
+    </table>
+    <a th:href="@{/}">Homepage</a>
+</body>
+</html>
