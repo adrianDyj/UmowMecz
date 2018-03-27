@@ -14,30 +14,15 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotNull
-    @Size(max = 100)
-    @Column(unique = true)
     private String title;
-
-    @NotNull
-    @Size(max = 250)
     private String description;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "posted_at")
     private Date postedAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
     private Type type;
 
     public Event() {
     }
 
-    public Event(@NotNull @Size(max = 100) String title, @NotNull @Size(max = 250) String description) {
+    public Event(String title, String description) {
         this.title = title;
         this.description = description;
     }
@@ -74,13 +59,13 @@ public class Event implements Serializable {
         this.postedAt = postedAt;
     }
 
-    public User getUser() {
+    /*public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
+    }*/
 
     public Type getType() {
         return type;
