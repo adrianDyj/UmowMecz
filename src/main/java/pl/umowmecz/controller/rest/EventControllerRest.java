@@ -3,7 +3,7 @@ package pl.umowmecz.controller.rest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pl.umowmecz.model.Event;
-import pl.umowmecz.service.EventService;
+import pl.umowmecz.repository.EventRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,15 +12,15 @@ import java.util.List;
 @RequestMapping("/api/events")
 public class EventControllerRest {
 
-    private EventService eventService;
+    private EventRepository eventRepository;
 
-    public EventControllerRest(EventService eventService) {
-        this.eventService = eventService;
+    public EventControllerRest(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Event> getEvents(@RequestParam(defaultValue = "title") String orderBy) {
-        List<Event> events = eventService.findAll();
+        List<Event> events = eventRepository.findAll();
         if ("title".equals(orderBy)) {
             events.sort(Comparator.comparing(Event::getTitle));
         }
@@ -29,11 +29,11 @@ public class EventControllerRest {
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Event getEvent(@PathVariable Long id) {
-        return eventService.findEvent(id);
+        return eventRepository.findOne(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveEvent(@RequestBody Event event) {
-        eventService.save(event);
+        eventRepository.save(event);
     }
 }

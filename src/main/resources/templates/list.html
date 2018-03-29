@@ -10,10 +10,12 @@
         <tr>
             <th>Title</th>
             <th>Description</th>
+            <th>User</th>
         </tr>
         <tr th:each="event: ${eventList}">
             <td th:text="${event.title}"></td>
             <td th:text="${event.description}"></td>
+            <td th:text="${event.user.getEmail()}"></td>
         </tr>
     </table>
     <a th:href="@{/}">Homepage</a>

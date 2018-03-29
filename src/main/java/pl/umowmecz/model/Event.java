@@ -1,8 +1,6 @@
 package pl.umowmecz.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.*;
@@ -10,6 +8,7 @@ import java.util.*;
 @XmlRootElement
 @Entity
 public class Event implements Serializable {
+    private static final long serialVersionUID = 8539936152170847419L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +17,9 @@ public class Event implements Serializable {
     private String description;
     private Date postedAt;
     private Type type;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Event() {
     }
@@ -59,13 +61,13 @@ public class Event implements Serializable {
         this.postedAt = postedAt;
     }
 
-    /*public User getUser() {
+    public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
 
     public Type getType() {
         return type;

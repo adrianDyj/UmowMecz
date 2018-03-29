@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import pl.umowmecz.model.User;
 import pl.umowmecz.model.UserRole;
 import pl.umowmecz.repository.UserRepository;
-import pl.umowmecz.service.UserService;
 
 import java.util.HashSet;
 import java.util.Set;
