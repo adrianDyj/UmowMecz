@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.umowmecz.model.Event;
-import pl.umowmecz.model.User;
 import pl.umowmecz.service.EventService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/event")
@@ -27,9 +24,8 @@ public class EventController {
 
     @GetMapping
     public String listEvents(Model model) {
-        List<Event> events = eventService.findAll();
-        model.addAttribute("eventList", events);
-        return "list";
+        model.addAttribute("eventModel", new Event());
+        return "add_event";
     }
 
     @PostMapping

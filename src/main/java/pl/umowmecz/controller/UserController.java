@@ -25,17 +25,17 @@ public class UserController {
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
-        return "registerForm";
+        return "register_form";
     }
 
     @PostMapping("/register")
     public String addUser(@ModelAttribute @Valid User user,
                           BindingResult bindResult) {
         if(bindResult.hasErrors())
-            return "registerForm";
+            return "register_form";
         else {
             userService.addWithDefaultRole(user);
-            return "registerSuccess";
+            return "register_success";
         }
     }
 }

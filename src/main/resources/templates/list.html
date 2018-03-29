@@ -1,23 +1,56 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
-    <title>List of all events</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <title>Umowmecz.pl | Homepage</title>
 </head>
+
 <body>
-    <h1>All Events:</h1>
-    <table border="1">
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>User</th>
-        </tr>
-        <tr th:each="event: ${eventList}">
-            <td th:text="${event.title}"></td>
-            <td th:text="${event.description}"></td>
-            <td th:text="${event.user.getEmail()}"></td>
-        </tr>
-    </table>
-    <a th:href="@{/}">Homepage</a>
+
+<nav class = "navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/" class="navbar-brand">Umowmecz.pl</a>
+
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="glyphicon glyphicon-list"></span>
+        </button>
+
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#">Główna Strona</a></li>
+                <li><a href="/event">Dodaj spotkanie</a></li>
+                <li sec:authorize="isAnonymous()"><a href="loginform">Zaloguj się</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="logout">Wyloguj się</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row bs-callout bs-callout-success" th:each="event: ${eventList}" th:object="${event}">
+        <div class="col col-md-11 col-sm-10">
+            <h3 class="centered"><a href="#" th:text="*{title}">Meczyk</a></h3>
+            <h6><small>Dodane przez: <span th:text="*{user.getEmail()}"></span>, Dnia: <span th:text="*{#dates.format(getPostedAt(), 'dd-MM-yyyy HH:mm:ss')}"></span></small></h6>
+            <p th:text="*{description}"></p>
+            <button class="btn btn-default btn-xs">Przejdź do strony</button>
+        </div>
+    </div>
+    <form action="logout" th:action="@{/logout}" method="post" >
+        <input type="submit" value="Wyloguj się" />
+    </form>
+
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="navbar-text">Umowmecz.pl - developed by <a href="#">adriandyjecinski.pl</a></p>
+    </div>
+</footer>
+
 </body>
 </html>

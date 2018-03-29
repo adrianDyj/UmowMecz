@@ -1,15 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Please Login</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <title>Umowmecz.pl | Logowanie</title>
 </head>
 <body>
-    <h1>Please Login</h1>
-    <form action="loginform" th:action="@{/loginform}" method="post">
-        <input name="username" placeholder="Username" /> <br />
-        <input name="password" placeholder="Password" /> <br />
-        <input type="submit" value="Login" />
-    </form>
+
+<nav class = "navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/" class="navbar-brand">Umowmecz.pl</a>
+
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="glyphicon glyphicon-list"></span>
+        </button>
+
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#">Główna Strona</a></li>
+                <li><a href="/event">Dodaj spotkanie</a></li>
+                <li><a href="loginform">Zaloguj się</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container"><br/><br/><br/><br/>
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <h1 class="form-signin-heading">Zaloguj się</h1>
+        <form class="form-signin" action="loginform" th:action="@{/loginform}" method="post">
+            <input class="form-control" name="username" type="email" placeholder="Email"/> <br/>
+            <input class="form-control" name="password" type="password" placeholder="Password"/> <br/>
+            <input class="btn btn-lg btn-success btn-block" type="submit" value="Zaloguj"/>
+            <a href="register">Zarejestruj</a>
+        </form>
+    </div>
+</div>
 </body>
 </html>
