@@ -1,18 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8" />
-    <title>Event Manager</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />v
+    <title>Umowmecz.pl | Logowanie</title>
 </head>
 <body>
-    <p th:text="${message}"></p>
-    <h1>Add event:</h1>
-    <form th:action="@{/event}" th:object="${eventModel}" method="post">
-        <p><input type="text" th:field="*{title}" placeholder="Title" /></p>
-        <p><input type="text" th:field="*{description}" placeholder="Description"/></p>
-        <p><input type="submit" value="Add event" /></p>
-    </form>
 
-    <a th:href="@{/event}">List all events</a>
+<nav class = "navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/" class="navbar-brand">Umowmecz.pl</a>
+
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="glyphicon glyphicon-list"></span>
+        </button>
+
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/">Główna Strona</a></li>
+                <li><a href="/event">Dodaj spotkanie</a></li>
+                <li sec:authorize="isAnonymous()"><a href="loginform">Zaloguj się</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="logout">Wyloguj się</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container">
+    <div class="col-md-8 col-md-offset-2">
+        <form class="form-signin" method="post" action="event" th:action="@{/event}" th:object="${eventModel}">
+            <h2 class="form-signin-heading">Dodaj nowy mecz</h2>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked="checked"/> Piłka nożna
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" autocomplete="off"/> Koszykówka
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option3" autocomplete="off"/> Siatkówka
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option4" autocomplete="off"/> Inne
+                </label>
+            </div><br/><br/>
+            <input name="inputName" type="text" th:field="*{title}" class="form-control" placeholder="Tytuł meczu"
+                   required="required" autofocus="autofocus" /><br/>
+            <textarea name="inputDescription" th:field="*{description}" rows="5"
+                      class="form-control" placeholder="Opis i informacje dodatkowe" required="required" autofocus="autofocus"></textarea><br/>
+            <input class="btn btn-lg btn-success btn-block" type="submit"
+                   value="Dodaj" />
+        </form>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="navbar-text">Umowmecz.pl - developed by <a href="#">adriandyjecinski.pl</a></p>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+<!--
+<p th:text="${message}"></p>
+<h1>Add event:</h1>
+<form th:action="@{/event}" th:object="${eventModel}" method="post">
+    <p><input type="text" th:field="*{title}" placeholder="Title" /></p>
+    <p><input type="text" th:field="*{description}" placeholder="Description"/></p>
+    <p><input type="submit" value="Add event" /></p>
+</form>-->
