@@ -31,6 +31,20 @@
     </div>
 </nav>
 
+<div class="jumbotron">
+    <div class="container">
+    <h1 class="display-4">Umów mecz i zaproś znajomych!</h1>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ultricies eros.
+        Maecenas sit amet enim eu nulla elementum porta id id libero. Proin aliquam sem lectus, in malesuada ex placerat nec..</p>
+    <hr class="my-4"/>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ultricies eros.
+        Maecenas sit amet enim eu nulla elementum porta id id libero.</p>
+    <p class="lead">
+        <a class="btn btn-success btn-lg" href="/event" role="button">Umów mecz</a>
+    </p>
+    </div>
+</div>
+
 <div class="container">
     <div class="row bs-callout bs-callout-success" th:each="event: ${eventList}" th:object="${event}">
         <div class="col col-md-11 col-sm-10">
@@ -40,9 +54,6 @@
             <button class="btn btn-default btn-xs">Przejdź do strony</button>
         </div>
     </div>
-    <form action="logout" th:action="@{/logout}" method="post" >
-        <input type="submit" value="Wyloguj się" />
-    </form>
 
 </div>
 
