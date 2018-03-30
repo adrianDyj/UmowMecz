@@ -1,12 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
-    <title>Registration form</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <title>Umowmecz.pl | Rejestracja</title>
 </head>
 <body>
-<h1>Registration form</h1>
-<form action="#" method="post" th:action="@{/register}" th:object="${user}">
+
+<nav class = "navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/" class="navbar-brand">Umowmecz.pl</a>
+
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="glyphicon glyphicon-list"></span>
+        </button>
+
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/">Główna Strona</a></li>
+                <li><a href="/event">Dodaj spotkanie</a></li>
+                <li sec:authorize="isAnonymous()"><a href="loginform">Zaloguj się</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="logout">Wyloguj się</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container"><br/><br/><br/><br/>
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <h1 class="form-signin-heading">Zarejestruj się</h1>
+        <!--<h3 th:text="${error}"></h3>-->
+        <form class="form-signin" action="#" method="post" th:action="@{/register}" th:object="${user}">
+            <input class="form-control" th:field="*{firstName}" placeholder="Imię"/><br/>
+            <input class="form-control" th:field="*{lastName}" placeholder="Nazwisko"/><br/>
+            <p th:errors="*{email}">Email errors</p>
+            <input class="form-control" th:field="*{email}" type="email" placeholder="Email"/><br/>
+            <p th:errors="*{password}">Password errors</p>
+            <input class="form-control" th:field="*{password}" type="password" placeholder="Hasło"/><br/>
+            <input class="btn btn-lg btn-success btn-block" type="submit" value="Zarejestruj"/>
+        </form>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="navbar-text">Umowmecz.pl - developed by <a href="#">adriandyjecinski.pl</a></p>
+    </div>
+</footer>
+
+</body>
+</html>
+
+
+
+<!--<form action="#" method="post" th:action="@{/register}" th:object="${user}">
     <input th:field="*{firstName}" placeholder="First Name" /><br />
     <input th:field="*{lastName}" placeholder="Last Name" /><br />
     <p th:errors="*{email}">Email errors</p>
@@ -14,6 +63,4 @@
     <p th:errors="*{password}">Password errors</p>
     <input th:field="*{password}" type="password" placeholder="Password" /><br />
     <input type="submit" value="Register" />
-</form>
-</body>
-</html>
+</form>-->
