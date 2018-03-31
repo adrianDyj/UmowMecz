@@ -33,25 +33,18 @@
         <form class="form-signin" method="post" action="event" th:action="@{/event}" th:object="${eventModel}">
             <h2 class="form-signin-heading">Dodaj nowy mecz</h2>
             <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                    <input type="radio" name="options" id="option1" autocomplete="off" checked="checked"/> Piłka nożna
+                <label class="btn btn-primary" th:each="type : ${T(pl.umowmecz.model.Type).values()}">
+                    <input type="radio" th:id="${{type}}" th:field="*{type}" th:value="${{type}}" th:text="${type}"/>
                 </label>
-                <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option2" autocomplete="off"/> Koszykówka
-                </label>
-                <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option3" autocomplete="off"/> Siatkówka
-                </label>
-                <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option4" autocomplete="off"/> Inne
-                </label>
-            </div><br/><br/>
+            </div>
+            <br/><br/>
             <input name="inputName" type="text" th:field="*{title}" class="form-control" placeholder="Tytuł meczu"
-                   required="required" autofocus="autofocus" /><br/>
+                   required="required" autofocus="autofocus"/><br/>
             <textarea name="inputDescription" th:field="*{description}" rows="5"
-                      class="form-control" placeholder="Opis i informacje dodatkowe" required="required" autofocus="autofocus"></textarea><br/>
+                      class="form-control" placeholder="Opis i informacje dodatkowe" required="required"
+                      autofocus="autofocus"></textarea><br/>
             <input class="btn btn-lg btn-success btn-block" type="submit"
-                   value="Dodaj" />
+                   value="Dodaj"/>
         </form>
     </div>
 </div>
@@ -66,13 +59,3 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-<!--
-<p th:text="${message}"></p>
-<h1>Add event:</h1>
-<form th:action="@{/event}" th:object="${eventModel}" method="post">
-    <p><input type="text" th:field="*{title}" placeholder="Title" /></p>
-    <p><input type="text" th:field="*{description}" placeholder="Description"/></p>
-    <p><input type="submit" value="Add event" /></p>
-</form>-->

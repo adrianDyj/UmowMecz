@@ -16,6 +16,8 @@ public class User {
     private String firstName;
     private String lastName;
     @NotEmpty
+    private String username;
+    @NotEmpty
     private String email;
     @NotEmpty
     private String password;
@@ -49,6 +51,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -85,11 +95,15 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id
-                + ", firstName=" + firstName
-                + ", lastName=" + lastName
-                + ", email=" + email
-                + ", password=" + password
-                + ", roles=" + roles + "]";
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", events=" + events +
+                '}';
     }
 }

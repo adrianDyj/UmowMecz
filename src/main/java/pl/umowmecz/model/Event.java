@@ -1,5 +1,7 @@
 package pl.umowmecz.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -16,17 +18,20 @@ public class Event implements Serializable {
     private String title;
     private String description;
     private Date postedAt;
+    @Enumerated(EnumType.STRING)
     private Type type;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     public Event() {
     }
 
-    public Event(String title, String description) {
+    public Event(String title, String description, Type type) {
         this.title = title;
         this.description = description;
+        this.type = type;
     }
 
     public long getId() {

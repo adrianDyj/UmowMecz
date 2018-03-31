@@ -23,7 +23,7 @@ public class HomeController {
     public String home(Model model) {
         List<Event> events = eventService.findAll();
         model.addAttribute("eventList", events);
-        return "list";
+        return "index";
     }
 
     @GetMapping("/loginform")

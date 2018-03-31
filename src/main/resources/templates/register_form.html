@@ -33,8 +33,10 @@
         <h1 class="form-signin-heading">Zarejestruj się</h1>
         <!--<h3 th:text="${error}"></h3>-->
         <form class="form-signin" action="#" method="post" th:action="@{/register}" th:object="${user}">
-            <input class="form-control" th:field="*{firstName}" placeholder="Imię"/><br/>
+            <input class="form-control" th:field="*{firstName}" placeholder="Imię" autofocus="autofocus"/><br/>
             <input class="form-control" th:field="*{lastName}" placeholder="Nazwisko"/><br/>
+            <p th:errors="*{username}">Username errors</p>
+            <input class="form-control" th:field="*{username}" type="text" placeholder="Nazwa użytkownika"/><br/>
             <p th:errors="*{email}">Email errors</p>
             <input class="form-control" th:field="*{email}" type="email" placeholder="Email"/><br/>
             <p th:errors="*{password}">Password errors</p>
