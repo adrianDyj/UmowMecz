@@ -25,9 +25,4 @@ public class HomeController {
         model.addAttribute("eventList", events);
         return "index";
     }
-
-    @GetMapping("/loginform")
-    public String loginForm() {
-        return "login_form";
-    }
 }
