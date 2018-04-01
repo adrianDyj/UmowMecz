@@ -1,12 +1,14 @@
 package pl.umowmecz.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.umowmecz.model.Field;
 import pl.umowmecz.repository.FieldRepository;
 import pl.umowmecz.service.FieldService;
 
 import java.util.List;
 
+@Service
 public class FieldServiceImpl implements FieldService {
 
     @Autowired
