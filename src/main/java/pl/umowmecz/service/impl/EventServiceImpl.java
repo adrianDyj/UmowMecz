@@ -37,7 +37,9 @@ public class EventServiceImpl implements EventService {
         org.springframework.security.core.userdetails.User userDetails =
                 (org.springframework.security.core.userdetails.User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findByEmail(userDetails.getUsername());
-        event.setUser(user);
+        if (user != null) {
+            event.setUser(user);
+        }
         event.setPostedAt(new Date());
         eventRepository.save(event);
     }
