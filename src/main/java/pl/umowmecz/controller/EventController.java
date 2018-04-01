@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.umowmecz.model.Event;
 import pl.umowmecz.service.EventService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/event")
 public class EventController {
@@ -23,7 +25,7 @@ public class EventController {
     }
 
     @GetMapping
-    public String listEvents(Model model) {
+    public String addEvent(Model model) {
         model.addAttribute("eventModel", new Event());
         return "add_event";
     }
@@ -33,5 +35,12 @@ public class EventController {
         eventService.save(eventModel);
         redirectAttr.addFlashAttribute("message", "Event added successfuly");
         return "redirect:/";
+    }
+
+    @GetMapping("/all")
+    public String eventList(Model model) {
+        List<Event> events = eventService.findAll();
+        model.addAttribute("eventList", events);
+        return "event_list";
     }
 }

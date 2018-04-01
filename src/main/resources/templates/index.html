@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
-    <title>Umowmecz.pl | Homepage</title>
+    <title>Umowmecz.pl</title>
 </head>
 
 <body>
@@ -44,7 +44,6 @@
 </div>
 
 <div class="container">
-
     <div class="row">
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail text-center">
@@ -52,8 +51,7 @@
                 <div class="caption">
                     <h3>Baza boisk</h3>
                     <p>Tu znajdziesz listę wszystkich boisk w Trójmieście i nie tylko.</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
-                                                                                       role="button">Button</a></p>
+                    <p><a href="#" th:href="@{/fields}" class="btn btn-primary" role="button">Sprawdź</a></p>
                 </div>
             </div>
         </div>
@@ -63,8 +61,7 @@
                 <div class="caption">
                     <h3>Lista meczy</h3>
                     <p>Znajdz i dołącz do meczu rozgrywanego w twojej okolicy.</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
-                                                                                       role="button">Button</a></p>
+                    <p><a href="#" th:href="@{/event/all}" class="btn btn-primary" role="button">Sprawdź</a></p>
                 </div>
             </div>
         </div>
@@ -74,31 +71,16 @@
                 <div class="caption">
                     <h3>Dla programistów</h3>
                     <p>Zajrzyj tutaj jeśli interesuje cie API z danymi wszystkich meczów, które udostępniamy.</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
-                                                                                       role="button">Button</a></p>
+                    <p><a href="#" th:href="@{/apiList}" class="btn btn-primary" role="button">Sprawdź</a></p>
                 </div>
             </div>
         </div>
     </div>
-
-    <h1>Lista Meczy:</h1>
-    <div class="row bs-callout bs-callout-success" th:each="event: ${eventList}" th:object="${event}">
-        <div class="col col-md-11 col-sm-10">
-            <h3 class="centered"><a href="#" th:text="*{title}">Meczyk</a></h3>
-            <h6>
-                <small>Dodane przez: <span th:text="*{user.getUsername()}"></span>, Dnia: <span
-                        th:text="*{#dates.format(getPostedAt(), 'dd-MM-yyyy HH:mm:ss')}"></span></small>
-            </h6>
-            <p th:text="*{description}"></p>
-            <button class="btn btn-default btn-xs">Przejdź do strony</button>
-        </div>
-    </div>
-
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="navbar-text">Umowmecz.pl - developed by <a href="#">adriandyjecinski.pl</a></p>
+        <p class="navbar-text">Umowmecz.pl - developed by <a target="_blank" href="https://www.facebook.com/adrian.dyjecinski">Adrian Dyjeciński</a></p>
     </div>
 </footer>
 
