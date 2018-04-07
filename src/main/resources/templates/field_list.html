@@ -22,7 +22,7 @@
 
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="/">Główna Strona</a></li>
+                <li><a href="/">Główna Strona</a></li>
                 <li><a href="/event">Dodaj spotkanie</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="adminPanel">Panel administratora</a></li>
                 <li sec:authorize="isAnonymous()"><a href="loginform">Zaloguj się</a></li>
@@ -45,34 +45,16 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail text-center">
-                <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                <div class="caption">
-                    <h3>Baza boisk</h3>
-                    <p>Tu znajdziesz listę wszystkich boisk w Trójmieście i nie tylko.</p>
-                    <p><a href="#" th:href="@{/fields}" class="btn btn-primary" role="button">Sprawdź</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail text-center">
-                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-                <div class="caption">
-                    <h3>Lista meczy</h3>
-                    <p>Znajdz i dołącz do meczu rozgrywanego w twojej okolicy.</p>
-                    <p><a href="#" th:href="@{/event/all}" class="btn btn-primary" role="button">Sprawdź</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail text-center">
-                <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
-                <div class="caption">
-                    <h3>Dla programistów</h3>
-                    <p>Zajrzyj tutaj jeśli interesuje cie API z danymi wszystkich Orlików w Trójmieście i okolicach.</p>
-                    <p><a href="#" th:href="@{/api}" class="btn btn-primary" role="button">Sprawdź</a></p>
+    <div class="page-header">
+        <h1>Lista Orlików w Trójmieście</h1>
+    </div>
+    <div>
+        <div th:each="field : ${fieldList}" th:object="${field}">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3 class="centered"><a href="#" th:text="*{city + ', ' + street}"></a></h3>
+                    <small th:text="'(' + *{nextTo} + ')'"></small><br/><br/>
+                    <p><span class="glyphicon glyphicon-small glyphicon-earphone" aria-hidden="true"></span><span th:text="*{phoneNumber}"></span></p>
                 </div>
             </div>
         </div>

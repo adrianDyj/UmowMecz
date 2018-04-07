@@ -20,6 +20,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/">Główna Strona</a></li>
                 <li class="active"><a href="/event">Dodaj spotkanie</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="adminPanel">Panel administratora</a></li>
                 <li sec:authorize="isAnonymous()"><a href="loginform">Zaloguj się</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="logout">Wyloguj się</a></li>
             </ul>

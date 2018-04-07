@@ -33,23 +33,25 @@
 </nav>
 
 <div class="container">
-<h1>Lista Meczy:</h1>
-<div class="row bs-callout bs-callout-success" th:each="event: ${eventList}" th:object="${event}">
-    <div class="col col-md-11 col-sm-10">
-        <h3 class="centered"><a href="#" th:text="*{title}">Meczyk</a></h3>
-        <h6>
-            <small>Dodane przez: <span th:text="*{user.getUsername()}"></span>, Dnia: <span
-                    th:text="*{#dates.format(getPostedAt(), 'dd-MM-yyyy HH:mm:ss')}"></span></small>
-        </h6>
-        <p th:text="*{description}"></p>
-        <button class="btn btn-default btn-xs">Przejdź do strony</button>
+    <h1>Lista Meczy:</h1>
+    <div class="row bs-callout bs-callout-success" th:each="event: ${eventList}" th:object="${event}">
+        <div class="col col-md-11 col-sm-10">
+            <h3 class="centered"><a href="#" th:text="*{title}">Meczyk</a></h3>
+            <h6>
+                <small>Dodane przez: <span th:text="*{user.getUsername()}"></span>, Dnia: <span
+                        th:text="*{#dates.format(getPostedAt(), 'dd-MM-yyyy HH:mm:ss')}"></span></small>
+            </h6>
+            <p th:text="*{description}"></p>
+            <button class="btn btn-default btn-xs">Przejdź do strony</button>
+        </div>
     </div>
-</div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="navbar-text">Umowmecz.pl - developed by <a target="_blank" href="https://www.facebook.com/adrian.dyjecinski">Adrian Dyjeciński</a></p>
+        <p class="navbar-text">Umowmecz.pl - developed by <a target="_blank"
+                                                             href="https://www.facebook.com/adrian.dyjecinski">Adrian
+            Dyjeciński</a></p>
     </div>
 </footer>
 
