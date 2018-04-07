@@ -28,9 +28,9 @@ public class FieldControllerRest {
     public ResponseEntity<Collection<Field>> getFields() {
         Collection<Field> fields = this.fieldService.findAll();
         if (fields.isEmpty()) {
-            return new ResponseEntity<Collection<Field>>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Collection<Field>>(fields, HttpStatus.OK);
+        return new ResponseEntity<>(fields, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
