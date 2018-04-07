@@ -56,6 +56,7 @@ public class EventControllerRest {
         return new ResponseEntity<>(event, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody @Valid Event event,
                                              BindingResult bindingResult) {
         BindingErrorsResponse errors = new BindingErrorsResponse();
