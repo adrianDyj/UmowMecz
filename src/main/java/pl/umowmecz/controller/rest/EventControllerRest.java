@@ -1,11 +1,15 @@
 package pl.umowmecz.controller.rest;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.umowmecz.model.Event;
 import pl.umowmecz.service.EventService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Comparator;
 import java.util.List;
 
@@ -30,8 +34,12 @@ public class EventControllerRest {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Event getEvent(@PathVariable Long id) {
-        return eventService.findEvent(id);
+    public Event getEvent(@PathVariable Long id, HttpServletResponse response) {
+        Event event = eventService.findEvent(id);
+        if(event == null) {
+            response.setStatus(404);
+        }
+        return event;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
