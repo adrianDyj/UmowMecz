@@ -1,4 +1,4 @@
-package pl.umowmecz.controller.rest;
+package pl.umowmecz.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +24,7 @@ public class FieldControllerRest {
         this.fieldService = fieldService;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<Field>> getFields() {
         Collection<Field> fields = this.fieldService.findAll();
         if (fields.isEmpty()) {
@@ -33,7 +33,7 @@ public class FieldControllerRest {
         return new ResponseEntity<>(fields, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Field> getField(@PathVariable Long id) {
         Field field = null;
         field = this.fieldService.findField(id);
@@ -43,22 +43,28 @@ public class FieldControllerRest {
         return new ResponseEntity<>(field, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Field> addField(@RequestBody @Valid Field field, BindingResult bindingResult) {
+        BindingErrorsResponse errors = new BindingErrorsResponse();
         HttpHeaders headers = new HttpHeaders();
         if (bindingResult.hasErrors() || (field == null)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            errors.addAllErrors(bindingResult);
+            headers.add("errors", errors.toJSON());
+            return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
         }
         this.fieldService.save(field);
         return new ResponseEntity<>(field, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Field> updateField(@PathVariable Long id, @RequestBody @Valid Field field,
                                              BindingResult bindingResult) {
+        BindingErrorsResponse errors = new BindingErrorsResponse();
         HttpHeaders headers = new HttpHeaders();
         if (bindingResult.hasErrors() || field == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            errors.addAllErrors(bindingResult);
+            headers.add("errors", errors.toJSON());
+            return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
         }
         Field currentField = this.fieldService.findField(id);
         if (currentField == null) {
@@ -75,7 +81,7 @@ public class FieldControllerRest {
         return new ResponseEntity<>(currentField, HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteField(@PathVariable Long id) {
         Field field = this.fieldService.findField(id);
         if (field == null) {

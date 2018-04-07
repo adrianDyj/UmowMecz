@@ -1,10 +1,7 @@
-package pl.umowmecz.controller.rest;
+package pl.umowmecz.rest;
 
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.umowmecz.model.Event;
 import pl.umowmecz.service.EventService;
