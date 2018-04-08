@@ -11,11 +11,18 @@ import pl.umowmecz.model.Field;
 import pl.umowmecz.service.FieldService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/fields")
 public class FieldControllerRest {
+
+    private final String gd = "gdańsk";
+    private final String ga = "gdynia";
+    private final String gsp = "sopot";
 
     private FieldService fieldService;
 
@@ -25,10 +32,21 @@ public class FieldControllerRest {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Collection<Field>> getFields() {
+    public ResponseEntity<Collection<Field>> getFields(@RequestParam(required=false) String city) {
         Collection<Field> fields = this.fieldService.findAll();
         if (fields.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        if (city != null) {
+            if (city.equalsIgnoreCase("gdansk") || city.equalsIgnoreCase(gd)) {
+                fields = fields.stream().filter(x -> x.getCity().equalsIgnoreCase(gd)).collect(Collectors.toList());
+            } else if (city.equalsIgnoreCase(ga)) {
+                fields = fields.stream().filter(x -> x.getCity().equalsIgnoreCase(ga)).collect(Collectors.toList());
+            } else if (city.equalsIgnoreCase(gsp)) {
+                fields = fields.stream().filter(x -> x.getCity().equalsIgnoreCase(gsp)).collect(Collectors.toList());
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
         return new ResponseEntity<>(fields, HttpStatus.OK);
     }

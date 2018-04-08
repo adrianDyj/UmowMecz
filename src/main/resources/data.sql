@@ -22,6 +22,12 @@ VALUES ("Gdańsk", "Orłowska 13", "", "przy Zespole Kształcenia Podstawowego i
 insert into field (city, street, email, next_to, opening_hours, phone_number, url)
 VALUES ("Gdańsk", "Subisława 22", "", "przy Zespole Szkół Sportowych i Ogólnokształcących", "", "58 557-94-45", "");
 
+insert into field (city, street, email, next_to, opening_hours, phone_number, url)
+VALUES ("Sopot", "Subisława 22", "", "przy Zespole Szkół Sportowych i Ogólnokształcących", "", "58 557-94-45", "");
+
+insert into field (city, street, email, next_to, opening_hours, phone_number, url)
+VALUES ("Gdynia", "Subisława 22", "", "przy Zespole Szkół Sportowych i Ogólnokształcących", "", "58 557-94-45", "");
+
 /*Events*/
 insert into event (description, posted_at, title, type, user_id) values ("Opis do meczu jakis tam", "2017-10-20", "Meczyk", "FOOTBALL", "1");
 insert into event (description, posted_at, title, type, user_id) values ("Opis do drugiego meczu jakis tam", "2017-12-20", "Meczyk drugi", "FOOTBALL", "1");
