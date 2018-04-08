@@ -1,5 +1,6 @@
 package pl.umowmecz.rest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.util.Collection;
 @RequestMapping("/api/events")
 public class EventControllerRest {
 
+    Logger logger = Logger.getLogger(EventControllerRest.class);
     private EventService eventService;
 
     @Autowired
@@ -28,8 +30,10 @@ public class EventControllerRest {
     public ResponseEntity<Collection<Event>> getEvents() {
         Collection<Event> events = this.eventService.findAll();
         if (events.isEmpty()) {
+            logger.info("No events found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        logger.info("Found " + events.stream().count() + " event/s");
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
@@ -38,8 +42,10 @@ public class EventControllerRest {
         Event event = null;
         event = this.eventService.findEvent(id);
         if(event == null) {
+            logger.info("No event found with id: " + id);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        logger.info("Found event with id: " + id);
         return new ResponseEntity<>(event, HttpStatus.OK);
     }
 
@@ -73,6 +79,7 @@ public class EventControllerRest {
         currentEvent.setDescription(event.getDescription());
         currentEvent.setTitle(event.getTitle());
         currentEvent.setType(event.getType());
+        logger.info("Event with id " + id + " has been updated");
         this.eventService.save(currentEvent);
         return new ResponseEntity<>(currentEvent, HttpStatus.NO_CONTENT);
     }
@@ -83,6 +90,7 @@ public class EventControllerRest {
         if (event == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        logger.info("Event with id " + id + " has been deleted");
         this.eventService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
