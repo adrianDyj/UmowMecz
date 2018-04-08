@@ -1,12 +1,11 @@
 package pl.umowmecz.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.umowmecz.model.User;
 import pl.umowmecz.service.UserService;
 
@@ -15,6 +14,7 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 
+    Logger logger = Logger.getLogger(UserController.class);
     private UserService userService;
 
     @Autowired
@@ -22,19 +22,20 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/register")
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(Model model) {
         model.addAttribute("user", new User());
         return "register_form";
     }
 
-    @PostMapping("/register")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String addUser(@ModelAttribute @Valid User user,
                           BindingResult bindResult) {
         if(bindResult.hasErrors())
             return "register_form";
         else {
             userService.addWithDefaultRole(user);
+            logger.info("User registered with username: " + user.getUsername());
             return "register_success";
         }
     }
