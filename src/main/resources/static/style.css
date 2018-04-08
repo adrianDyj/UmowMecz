@@ -101,7 +101,7 @@ body {
 
 .thumbnail {
     border: 0 none;
-    box-shadow: none;
+    padding-top: 10px;
 }
 
 .line {
@@ -153,6 +153,6 @@ td.verb {
     font-weight: bold;
 }
 
-p {
-    line-height: 1.6em
+.border {
+    border: 2px solid #5cb85c;
 }
