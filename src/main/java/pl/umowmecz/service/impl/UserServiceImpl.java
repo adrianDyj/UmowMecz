@@ -1,6 +1,7 @@
 package pl.umowmecz.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.umowmecz.model.User;
 import pl.umowmecz.model.UserRole;
@@ -25,15 +26,24 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User findUser(long id) {
         return userRepository.findOne(id);
     }
 
     @Override
-    public void addWithDefaultRole(User user) {
+    public void addWithDefaultRole(User userDto) {
         UserRole defaultRole = roleRepository.findByRole(DEFAULT_ROLE);
+        User user = new User();
         user.getRoles().add(defaultRole);
+        user.setEmail(userDto.getEmail());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setUsername(userDto.getUsername());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userRepository.save(user);
     }
 }
