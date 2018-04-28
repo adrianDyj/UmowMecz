@@ -30,13 +30,13 @@ public class EventServiceImpl implements EventService {
     @Override
     public boolean save(Event event) {
         User user = LoggedUser.getLoggedUser();
-        if (checkIfUserCanAddMoreEvents(user)) {
-            if (user != null) {
+        if (user != null) {
+            if (checkIfUserCanAddMoreEvents(user)) {
                 event.setUser(user);
+                event.setPostedAt(new Date());
+                eventRepository.save(event);
+                return true;
             }
-            event.setPostedAt(new Date());
-            eventRepository.save(event);
-            return true;
         }
         return false;
     }
