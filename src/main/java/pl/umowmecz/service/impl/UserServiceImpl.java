@@ -25,6 +25,12 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
     }
 
+    @Override
+    public User findUser(long id) {
+        return userRepository.findOne(id);
+    }
+
+    @Override
     public void addWithDefaultRole(User user) {
         UserRole defaultRole = roleRepository.findByRole(DEFAULT_ROLE);
         user.getRoles().add(defaultRole);

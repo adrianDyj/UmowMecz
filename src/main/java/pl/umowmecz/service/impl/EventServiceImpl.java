@@ -9,7 +9,6 @@ import pl.umowmecz.repository.EventRepository;
 import pl.umowmecz.repository.UserRepository;
 import pl.umowmecz.service.EventService;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 

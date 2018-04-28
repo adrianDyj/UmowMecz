@@ -84,15 +84,16 @@ body {
 
 .image{
     background:
-        /* top, transparent red, faked with gradient */
+        /* top, transparent black, faked with gradient */
             linear-gradient(
                     rgba(33, 33, 33, 0.60),
                     rgba(33, 33, 33, 0.60)
             ),
                 /* bottom, image */
-            url("images/bg-players.jpg");
-    background-size: 100%;
+            url("images/bg-players.jpg") no-repeat;
+    background-size: cover;
     color: #dddddd
+
 }
 
 .glyphicon {

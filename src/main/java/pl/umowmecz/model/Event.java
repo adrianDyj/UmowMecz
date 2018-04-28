@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.*;
 
@@ -67,6 +66,14 @@ public class Event implements Serializable {
         this.postedAt = postedAt;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public User getUser() {
         return user;
     }
@@ -75,12 +82,28 @@ public class Event implements Serializable {
         this.user = user;
     }
 
-    public Type getType() {
-        return type;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        if (id != null ? !id.equals(event.id) : event.id != null) return false;
+        if (title != null ? !title.equals(event.title) : event.title != null) return false;
+        if (description != null ? !description.equals(event.description) : event.description != null) return false;
+        if (postedAt != null ? !postedAt.equals(event.postedAt) : event.postedAt != null) return false;
+        return type == event.type;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (postedAt != null ? postedAt.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -91,26 +114,6 @@ public class Event implements Serializable {
                 ", description='" + description + '\'' +
                 ", postedAt=" + postedAt +
                 ", type=" + type +
-                ", user=" + user +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return Objects.equals(id, event.id) &&
-                Objects.equals(title, event.title) &&
-                Objects.equals(description, event.description) &&
-                Objects.equals(postedAt, event.postedAt) &&
-                type == event.type &&
-                Objects.equals(user, event.user);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, title, description, postedAt, type, user);
     }
 }
