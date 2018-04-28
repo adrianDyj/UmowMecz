@@ -10,7 +10,7 @@ public interface EventService {
 
     Event findEvent(long id);
 
-    void save(Event event);
+    boolean save(Event event);
 
     void delete(long id);
 }

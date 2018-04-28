@@ -8,7 +8,7 @@ import pl.umowmecz.repository.UserRepository;
 
 @Component
 public class LoggedUser {
-    
+
     private static UserRepository userRepository;
 
     @Autowired

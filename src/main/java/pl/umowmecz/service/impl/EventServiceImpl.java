@@ -28,17 +28,29 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void save(Event event) {
+    public boolean save(Event event) {
         User user = LoggedUser.getLoggedUser();
-        if (user != null) {
-            event.setUser(user);
+        if (checkIfUserCanAddMoreEvents(user)) {
+            if (user != null) {
+                event.setUser(user);
+            }
+            event.setPostedAt(new Date());
+            eventRepository.save(event);
+            return true;
         }
-        event.setPostedAt(new Date());
-        eventRepository.save(event);
+        return false;
     }
 
     @Override
     public void delete(long id) {
 
+    }
+
+    private boolean checkIfUserCanAddMoreEvents(User user) {
+        List<Event> events = user.getEvents();
+        if(events.size() >= 3) {
+            return false;
+        }
+        return true;
     }
 }
