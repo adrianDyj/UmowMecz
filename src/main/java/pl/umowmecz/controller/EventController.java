@@ -31,10 +31,9 @@ public class EventController {
     public String addEvent(@ModelAttribute Event eventModel, RedirectAttributes redirectAttr) {
         boolean isEventAdded = eventService.save(eventModel);
         if (isEventAdded) {
-            redirectAttr.addFlashAttribute("message", "Event added successfuly");
             return "redirect:/";
         }
-        redirectAttr.addFlashAttribute("message", "Nie możesz dodać więcej niż 3 wydarzenia!");
+        redirectAttr.addFlashAttribute("message", "Nie możesz dodać więcej niż 3 wydarzenia na raz!");
         return "redirect:/event";
     }
 
