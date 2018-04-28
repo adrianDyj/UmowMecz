@@ -29,9 +29,13 @@ public class EventController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String addEvent(@ModelAttribute Event eventModel, RedirectAttributes redirectAttr) {
-        eventService.save(eventModel);
-        redirectAttr.addFlashAttribute("message", "Event added successfuly");
-        return "redirect:/";
+        boolean isEventAdded = eventService.save(eventModel);
+        if (isEventAdded) {
+            redirectAttr.addFlashAttribute("message", "Event added successfuly");
+            return "redirect:/";
+        }
+        redirectAttr.addFlashAttribute("message", "Nie możesz dodać więcej niż 3 wydarzenia!");
+        return "redirect:/event";
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
