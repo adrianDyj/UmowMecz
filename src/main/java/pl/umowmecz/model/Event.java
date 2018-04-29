@@ -17,6 +17,8 @@ public class Event implements Serializable {
     private Long id;
     private String title;
     private String description;
+    private String location;
+    private Date matchDay;
     private Date postedAt;
     @Enumerated(EnumType.STRING)
     private Type type;
@@ -58,6 +60,22 @@ public class Event implements Serializable {
         this.description = description;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Date getMatchDay() {
+        return matchDay;
+    }
+
+    public void setMatchDay(Date matchDay) {
+        this.matchDay = matchDay;
+    }
+
     public Date getPostedAt() {
         return postedAt;
     }
@@ -92,6 +110,8 @@ public class Event implements Serializable {
         if (id != null ? !id.equals(event.id) : event.id != null) return false;
         if (title != null ? !title.equals(event.title) : event.title != null) return false;
         if (description != null ? !description.equals(event.description) : event.description != null) return false;
+        if (location != null ? !location.equals(event.location) : event.location != null) return false;
+        if (matchDay != null ? !matchDay.equals(event.matchDay) : event.matchDay != null) return false;
         if (postedAt != null ? !postedAt.equals(event.postedAt) : event.postedAt != null) return false;
         return type == event.type;
     }
@@ -101,6 +121,8 @@ public class Event implements Serializable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (matchDay != null ? matchDay.hashCode() : 0);
         result = 31 * result + (postedAt != null ? postedAt.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
@@ -112,6 +134,8 @@ public class Event implements Serializable {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", matchDay=" + matchDay +
                 ", postedAt=" + postedAt +
                 ", type=" + type +
                 '}';

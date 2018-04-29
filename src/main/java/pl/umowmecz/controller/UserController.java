@@ -31,7 +31,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String addUser(@ModelAttribute @Valid User user,
                           BindingResult bindResult, Model model) {
-        
+
         if (usernameExists(user.getUsername())) {
             model.addAttribute("userAlreadyExists", "Użytkownik z tą nazwą użytkownika już instnieje.");
             return "register_form";
