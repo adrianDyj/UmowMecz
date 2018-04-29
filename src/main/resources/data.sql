@@ -7,8 +7,6 @@ insert into user_role(role, description) VALUES ("ROLE_ADMIN", "Role for adminin
 insert into user (email, first_name, last_name, password, username) values ("adi@mail.com", "Adrian", "Dyjeciński", "123", "Adi");
 insert into user_roles (user_id, roles_id) values (1, 2);
 insert into user_roles (user_id, roles_id) values (1, 1);
-insert into user (email, first_name, last_name, password, username, id) values ("qwe@qwe", "qwe", "qwe", "qwe", "qwe", "2");
-insert into user_roles (user_id, roles_id) values (2, 1);
 
 
 
@@ -35,6 +33,6 @@ VALUES ("Gdynia", "Subisława 22", "", "przy Zespole Szkół Sportowych i Ogóln
 
 
 
-insert into event (description, posted_at, title, type, user_id) values ("Opis do meczu jakis tam", "2017-10-20", "Meczyk", "FOOTBALL", "1");
-insert into event (description, posted_at, title, type, user_id) values ("Opis do drugiego meczu jakis tam", "2017-12-20", "Meczyk drugi", "FOOTBALL", "1");
-insert into event (description, posted_at, title, type, user_id) values ("Opis do meczu trzeciego jakis tam", "2018-03-20", "Meczyk trzeci", "FOOTBALL", "1");
+insert into event (description, posted_at, match_day,title, type, location, user_id) values ("Opis do meczu jakis tam", "2017-10-20", "2017-12-20", "Meczyk", "FOOTBALL", "GDANSK", "1");
+insert into event (description, posted_at, match_day,title, type, location, user_id) values ("Opis do drugiego meczu jakis tam", "2017-12-20", "2017-12-20", "Meczyk drugi", "FOOTBALL", "SOPOT", "1");
+insert into event (description, posted_at, match_day, title, type, location, user_id) values ("Opis do meczu trzeciego jakis tam", "2018-03-20", "2017-12-20", "Meczyk trzeci", "FOOTBALL", "GDYNIA", "1");

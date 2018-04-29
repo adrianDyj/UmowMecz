@@ -2,6 +2,7 @@ package pl.umowmecz.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,7 +18,9 @@ public class Event implements Serializable {
     private Long id;
     private String title;
     private String description;
-    private String location;
+    @Enumerated(EnumType.STRING)
+    private City location;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date matchDay;
     private Date postedAt;
     @Enumerated(EnumType.STRING)
@@ -60,11 +63,11 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    public String getLocation() {
+    public City getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(City location) {
         this.location = location;
     }
 

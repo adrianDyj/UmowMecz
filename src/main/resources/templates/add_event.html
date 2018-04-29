@@ -43,8 +43,19 @@
                 </label>
             </div>
             <br/><br/>
+
+            <select class="form-control option-small" th:field="*{location}">
+                <option th:each="city : ${T(pl.umowmecz.model.City).values()}"
+                        th:value="${city}"
+                        th:text="${city.getDisplayCity()}">
+                </option>
+            </select><br/>
+
+            <input class="form-control option-small" type="date" th:value="*{matchDay}" th:field="*{matchDay}"/><br/>
+
             <input name="inputName" type="text" th:field="*{title}" class="form-control" placeholder="Tytuł meczu"
                    required="required" autofocus="autofocus"/><br/>
+
             <textarea name="inputDescription" th:field="*{description}" rows="5"
                       class="form-control" placeholder="Opis i informacje dodatkowe" required="required"
                       autofocus="autofocus"></textarea><br/>

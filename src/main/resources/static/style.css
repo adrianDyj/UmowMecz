@@ -100,7 +100,7 @@ body {
     font-size: 50px;
 }
 
-.thumbnail {
+.thumbnail-main {
     border: 0 none;
     padding-top: 10px;
 }
@@ -156,4 +156,9 @@ td.verb {
 
 .border {
     border: 2px solid #5cb85c;
+}
+
+.option-small {
+    width: 20%;
+    min-width: 180px;
 }

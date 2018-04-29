@@ -33,7 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     "/api/*/*",
                     "/api/*",
                     "/fields",
-                    "/api").permitAll()
+                    "/api",
+                    "/event",
+                    "/event/all").permitAll()
             .anyRequest().authenticated()
         .and()
             .formLogin()
