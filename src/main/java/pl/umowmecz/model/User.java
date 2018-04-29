@@ -21,6 +21,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     @NotEmpty(message = "Pole nazwa użytkownika nie może być puste.")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
     @NotEmpty(message = "Pole email nie może być puste.")
     @Column(name = "email", nullable = false, unique = true)

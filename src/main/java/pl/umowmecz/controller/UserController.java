@@ -30,9 +30,14 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String addUser(@ModelAttribute @Valid User user,
-                          BindingResult bindResult, Model model) throws EmailExistsException {
+                          BindingResult bindResult, Model model) {
+        
+        if (usernameExists(user.getUsername())) {
+            model.addAttribute("userAlreadyExists", "Użytkownik z tą nazwą użytkownika już instnieje.");
+            return "register_form";
+        }
 
-        if (userExists(user.getEmail())) {
+        if (emailExists(user.getEmail())) {
             model.addAttribute("userAlreadyExists", "Użytkownik z tym adresem email już istnieje.");
             return "register_form";
         }
@@ -46,12 +51,21 @@ public class UserController {
         }
     }
 
-    private boolean userExists(String givenEmail) {
+    private boolean emailExists(String givenEmail) {
         boolean doesEmailExists = false;
         User user = userService.findByEmail(givenEmail);
         if (user != null) {
             doesEmailExists = true;
         }
         return doesEmailExists;
+    }
+
+    private boolean usernameExists(String username) {
+        boolean doesUsernameExists = false;
+        User user = userService.findByUsername(username);
+        if (user != null) {
+            doesUsernameExists = true;
+        }
+        return doesUsernameExists;
     }
 }

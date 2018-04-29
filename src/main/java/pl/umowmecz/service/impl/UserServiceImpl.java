@@ -20,12 +20,8 @@ public class UserServiceImpl implements UserService {
     private UserRoleRepository roleRepository;
 
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserRoleRepository roleRepository) {
         this.userRepository = userRepository;
-    }
-
-    @Autowired
-    public void setRoleRepository(UserRoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 
@@ -35,6 +31,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
