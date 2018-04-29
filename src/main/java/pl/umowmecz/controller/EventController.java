@@ -33,7 +33,7 @@ public class EventController {
         if (isEventAdded) {
             return "redirect:/";
         }
-        redirectAttr.addFlashAttribute("message", "Nie możesz dodać więcej niż 3 wydarzenia na raz!");
+        redirectAttr.addFlashAttribute("message", "Nie możesz dodać więcej wydarzeń!");
         return "redirect:/event";
     }
 

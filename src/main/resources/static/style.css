@@ -162,3 +162,7 @@ td.verb {
     width: 20%;
     min-width: 180px;
 }
+
+.thumbnail-event {
+    margin-bottom: 20px;
+}

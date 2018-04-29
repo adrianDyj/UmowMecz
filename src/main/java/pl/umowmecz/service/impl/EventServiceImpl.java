@@ -32,10 +32,12 @@ public class EventServiceImpl implements EventService {
         User user = LoggedUser.getLoggedUser();
         if (user != null) {
             if (checkIfUserCanAddMoreEvents(user)) {
-                event.setUser(user);
-                event.setPostedAt(new Date());
-                eventRepository.save(event);
-                return true;
+                if (!checkIfThereIsMaxEvents()) {
+                    event.setUser(user);
+                    event.setPostedAt(new Date());
+                    eventRepository.save(event);
+                    return true;
+                }
             }
         }
         return false;
@@ -44,6 +46,14 @@ public class EventServiceImpl implements EventService {
     @Override
     public void delete(long id) {
 
+    }
+
+    private boolean checkIfThereIsMaxEvents() {
+        List<Event> events = eventRepository.findAll();
+        if (events.size() >= 10) {
+            return true;
+        }
+        return false;
     }
 
     private boolean checkIfUserCanAddMoreEvents(User user) {

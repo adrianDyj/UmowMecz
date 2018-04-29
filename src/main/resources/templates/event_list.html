@@ -51,7 +51,7 @@
 
     <div class="row">
         <div class="col-sm-6 col-md-4" th:each="event: ${eventList}" th:object="${event}">
-            <div class="thumbnail">
+            <div class="thumbnail thumbnail-event">
                 <img src="/images/thumbnail-image.jpg" alt="..."/>
                 <div class="caption">
                     <h3 class="centered" th:text="*{title}"></h3>
@@ -68,7 +68,7 @@
                     <span th:text="*{#dates.format(getMatchDay(), 'dd-MMM-yyyy')}"></span><br/><br/>
 
 
-                    <button class="btn btn-default btn-xs">Przejdź do strony</button>
+                    <button class="btn btn-default btn-xs">Przejdź do wydarzenia</button>
                 </div>
             </div>
         </div>
