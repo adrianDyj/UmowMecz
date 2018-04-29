@@ -4,7 +4,7 @@ import pl.umowmecz.model.User;
 
 public interface UserService {
 
-    User findUser(long id);
+    User findByEmail(String email);
 
     void addWithDefaultRole(User user);
 }

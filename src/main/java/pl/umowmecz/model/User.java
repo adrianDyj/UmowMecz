@@ -20,11 +20,12 @@ public class User implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
-    @NotEmpty
+    @NotEmpty(message = "Pole nazwa użytkownika nie może być puste.")
     private String username;
-    @NotEmpty
+    @NotEmpty(message = "Pole email nie może być puste.")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
-    @NotEmpty
+    @NotEmpty(message = "Pole hasło nie może być puste.")
     private String password;
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<UserRole> roles = new HashSet<>();
@@ -133,7 +134,6 @@ public class User implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

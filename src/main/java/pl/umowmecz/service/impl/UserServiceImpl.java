@@ -9,7 +9,10 @@ import pl.umowmecz.repository.UserRepository;
 import pl.umowmecz.repository.UserRoleRepository;
 import pl.umowmecz.service.UserService;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private static final String DEFAULT_ROLE = "ROLE_USER";
@@ -30,8 +33,8 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public User findUser(long id) {
-        return userRepository.findOne(id);
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
