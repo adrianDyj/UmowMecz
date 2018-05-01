@@ -2,13 +2,9 @@
 insert into user_role(role, description) VALUES ("ROLE_USER", "Default role for user");
 insert into user_role(role, description) VALUES ("ROLE_ADMIN", "Role for admininstrators");
 
-
-
 insert into user (email, first_name, last_name, password, username) values ("adi@mail.com", "Adrian", "Dyjeciński", "123", "Adi");
 insert into user_roles (user_id, roles_id) values (1, 2);
 insert into user_roles (user_id, roles_id) values (1, 1);
-
-
 
 insert into field (city, street, email, next_to, opening_hours, phone_number, url)
 VALUES ("Gdańsk", "Kołobrzeska 77", "", "przy Ogólnokształcących Szkołach Sportowych", "", "58 557-17-41", "");
