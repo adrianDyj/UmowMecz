@@ -166,3 +166,11 @@ td.verb {
 .thumbnail-event {
     margin-bottom: 20px;
 }
+
+.green {
+    color: #5cb85c;
+}
+
+.white {
+    color: #eeeeee;
+}

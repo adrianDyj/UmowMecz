@@ -8,6 +8,7 @@ import pl.umowmecz.repository.EventRepository;
 import pl.umowmecz.security.LoggedUser;
 import pl.umowmecz.service.EventService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
